@@ -22,12 +22,12 @@ public class CourseService {
        try {
            var credit = (int) (Math.random() * 4) + 1;
            Course course = courseRepository.save(Course.builder()
-                           .StudyTime(request.getStudyTime())
-                           .lecturer(request.getLecturer())
-                           .uuid(UUID.randomUUID().toString())
-                           .credit(String.valueOf(credit))
-                           .studyDate(request.getStudyDate())
-                           .courseName(request.getCourseName())
+                           .StudyTime(request.getStudyTime()) // ช่วงเวลา
+                           .lecturer(request.getLecturer()) // อ. ผู้สอน
+                           .uuid(UUID.randomUUID().toString()) // id course
+                           .credit(String.valueOf(credit)) // หน่วยกิต
+                           .studyDate(request.getStudyDate()) // จ-ศ
+                           .courseName(request.getCourseName()) //ชื่อวิชา
                    .build());
            return new ResponseEntity<>(course, HttpStatus.CREATED);
 
@@ -69,7 +69,6 @@ public class CourseService {
 
     public ResponseEntity<List<Course>> findAll(){
         try {
-
             return new ResponseEntity<>(courseRepository.findAll(), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
